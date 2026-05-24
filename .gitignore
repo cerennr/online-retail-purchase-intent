@@ -1,0 +1,21 @@
+# Veri dosyaları 
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.DS_Store
+
+# Jupyter Notebooks
+notebooks/
+
+# Trained Machine Learning Models
+models/
