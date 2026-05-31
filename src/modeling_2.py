@@ -97,10 +97,19 @@ def _lift_at_top_percent(y_true, y_prob, percent):
     return 0 if baseline == 0 else _precision_at_top_percent(y_true, y_prob, percent) / baseline
 
 
+EXCLUDED_FEATURES = [
+    "Freq_Last_60D",
+    "Spend_Last_60D",
+    "Mean_Quantity_Per_Invoice",
+    "Lifetime_Days",
+    "Recency",
+]
+
+
 def run_walkforward_validation_2(features_path=FEATURES_2_PATH, min_train_cutoffs=1, rebuild_features=False):
     df = load_or_build_features_2(features_path, rebuild_features=rebuild_features)
     cutoffs = sorted(df["Cutoff_Date"].unique())
-    drop_cols = ["CustomerID", "Cutoff_Date", "Target"]
+    drop_cols = ["CustomerID", "Cutoff_Date", "Target"] + EXCLUDED_FEATURES
     rows, predictions = [], []
 
     for test_idx in range(min_train_cutoffs, len(cutoffs)):

@@ -15,6 +15,7 @@ from modeling_2 import (
     WALKFORWARD_SUMMARY_2_PATH,
     binary_metrics_2,
     load_or_build_features_2,
+    EXCLUDED_FEATURES,
 )
 
 
@@ -74,7 +75,7 @@ def _summarize_baselines(results):
 
 def export_feature_importance_2(features_path=FEATURES_2_PATH):
     df = pd.read_csv(features_path)
-    feature_cols = [c for c in df.columns if c not in ["CustomerID", "Cutoff_Date", "Target"]]
+    feature_cols = [c for c in df.columns if c not in ["CustomerID", "Cutoff_Date", "Target"] + EXCLUDED_FEATURES]
 
     with open(FINAL_MODEL_2_PATH, "rb") as f:
         model = pickle.load(f)
